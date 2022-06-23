@@ -1,23 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import Buttons from './components/Buttons';
+import React, { useState } from 'react';
+import Display from './components/Display';
 
 function App() {
+  
+  let [count, addcount] = useState("")
+
+  function addFunc(symbol){
+    
+    if(symbol === "="){
+      addcount(count = calculate(count))
+      
+    }
+    else if(symbol === "CE"){
+      addcount(count = "")
+    }
+    else{addcount(count + symbol)}
+  }
+
+  function calculate(equation){
+    let result = eval(equation)
+    return result
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Display text = {count}/>
+      <Buttons addFunc = {addFunc}/>
     </div>
   );
 }
