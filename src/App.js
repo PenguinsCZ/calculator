@@ -8,20 +8,35 @@ function App() {
   let [count, addcount] = useState("")
 
   function addFunc(symbol){
-    
-    if(symbol === "="){
+    if(symbol === "CE"){
+      addcount(count = "")
+    }
+    else if(count === "ERROR"){
+
+    }
+    else if(symbol === "="){
       addcount(count = calculate(count))
       
     }
-    else if(symbol === "CE"){
-      addcount(count = "")
+    else{addcount(count + symbol)
+    
     }
-    else{addcount(count + symbol)}
+   
   }
 
   function calculate(equation){
-    let result = eval(equation)
-    return result
+    if(equation.includes("--")){
+      equation = equation.replace("--", "+")
+    }
+    try{
+      let result = eval(equation)
+      return result
+    }
+    catch{
+      let result = "ERROR"
+      return result
+    }
+    
   }
   return (
     <div className="App">
